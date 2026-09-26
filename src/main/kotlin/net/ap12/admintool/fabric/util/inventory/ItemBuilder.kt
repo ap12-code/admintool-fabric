@@ -3,6 +3,7 @@ package net.ap12.admintool.fabric.util.inventory
 import net.ap12.admintool.fabric.i18n.translate
 import net.ap12.admintool.fabric.ui.AdminToolUIHolder
 import net.ap12.admintool.fabric.util.Callback
+import net.ap12.admintool.fabric.util.components.split
 import net.minecraft.core.component.DataComponentPatch
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.component.DataComponents
@@ -100,7 +101,11 @@ class ItemBuilder(val stack: ItemStack) {
             }
             if (lore != null) {
                 val resolvedLore =
-                    lore!!.map { component -> component.translate(holder.player) }.toList()
+                    lore!!
+                        .flatMap { component ->
+                            component.translate(holder.player).split(Component.literal("\n"))
+                        }
+                        .toList()
                 it.set(
                     DataComponents.LORE,
                     ItemLore(

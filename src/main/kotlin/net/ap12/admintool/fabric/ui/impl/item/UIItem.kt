@@ -1,16 +1,16 @@
-package net.ap12.admintool.ui.impl.item
+package net.ap12.admintool.fabric.ui.impl.item
 
 import kotlinx.serialization.Serializable
 import net.ap12.admintool.fabric.AdminToolMod
 import net.ap12.admintool.fabric.ui.AdminToolUIHolder
 import net.ap12.admintool.fabric.ui.Keys
 import net.ap12.admintool.fabric.ui.Sounds
-import net.ap12.admintool.fabric.ui.impl.item.RegisteredItemStack
 import net.ap12.admintool.fabric.ui.impl.item.builder.UIItemBuilder
 import net.ap12.admintool.fabric.ui.impl.item.manager.UIItemManager
 import net.ap12.admintool.fabric.ui.impl.item.storage.UIStorage
 import net.ap12.admintool.fabric.ui.tab.Tab
 import net.ap12.admintool.fabric.util.inventory.*
+import net.ap12.admintool.ui.impl.item.ItemVisibility
 import net.kyori.adventure.key.Key
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items

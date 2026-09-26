@@ -15,10 +15,12 @@ import net.ap12.admintool.fabric.util.inventory.ContainerWithTitle
 import net.ap12.admintool.fabric.util.inventory.UIBuilder
 import net.ap12.admintool.fabric.util.inventory.inventory
 import net.ap12.admintool.fabric.util.inventory.item
+import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextColor
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.component.TooltipDisplay
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.math.ceil
 import kotlin.math.min
@@ -58,6 +60,13 @@ class UIPlayer : Tab {
                 val builtItem =
                     item(holder.plugin.heads.createHead(profile)) {
                         name(Component.literal(profile.name))
+
+                        stack.also {
+                            it.set(
+                                DataComponents.TOOLTIP_DISPLAY,
+                                TooltipDisplay(false, linkedSetOf(DataComponents.PROFILE)),
+                            )
+                        }
 
                         lore {
                             if (player.isOnline()) {

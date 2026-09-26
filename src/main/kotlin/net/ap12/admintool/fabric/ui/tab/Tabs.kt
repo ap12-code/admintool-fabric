@@ -5,9 +5,9 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import net.ap12.admintool.fabric.config.ext.NbtEnumSerializer
 import net.ap12.admintool.fabric.ui.impl.effect.UIEffect
 import net.ap12.admintool.fabric.ui.impl.home.UIHome
+import net.ap12.admintool.fabric.ui.impl.item.UIItem
 import net.ap12.admintool.fabric.ui.impl.player.UIPlayer
 import net.ap12.admintool.fabric.ui.impl.waypoint.UITeleport
-import net.ap12.admintool.ui.impl.item.UIItem
 
 @Serializable(Tabs.Serializer::class)
 enum class Tabs(val code: Byte, val creator: () -> Tab) {

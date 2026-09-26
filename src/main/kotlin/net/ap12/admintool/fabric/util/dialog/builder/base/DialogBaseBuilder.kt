@@ -2,14 +2,12 @@ package net.ap12.admintool.fabric.util.dialog.builder.base
 
 import net.ap12.admintool.fabric.i18n.translate
 import net.ap12.admintool.fabric.ui.AdminToolUIHolder
-import net.ap12.admintool.fabric.util.components.toComponent
 import net.ap12.admintool.fabric.util.dialog.builder.DialogDSL
 import net.ap12.admintool.fabric.util.dialog.builder.base.body.DialogBodyBuilder
 import net.ap12.admintool.fabric.util.dialog.builder.base.inputs.DialogBoolInputBuilder
 import net.ap12.admintool.fabric.util.dialog.builder.base.inputs.DialogNumberRangeInputBuilder
 import net.ap12.admintool.fabric.util.dialog.builder.base.inputs.DialogSingleOptionInputBuilder
 import net.ap12.admintool.fabric.util.dialog.builder.base.inputs.DialogTextInputBuilder
-import net.ap12.admintool.fabric.util.locale
 import net.minecraft.network.chat.Component
 import net.minecraft.server.dialog.CommonDialogData
 import net.minecraft.server.dialog.DialogAction
@@ -23,11 +21,11 @@ class DialogBaseBuilder(private val holder: AdminToolUIHolder) {
     private var title: Component = Component.empty()
 
     fun title(title: Component) {
-        this.title = title.translate(holder.player.locale())
+        this.title = title.translate(holder.player)
     }
 
     fun title(title: String, vararg args: String) {
-        this.title = title.toComponent().translate(holder.player.locale())
+        this.title = Component.translatableEscape(title, *args).translate(holder.player)
     }
 
     private val body = mutableListOf<DialogBody>()

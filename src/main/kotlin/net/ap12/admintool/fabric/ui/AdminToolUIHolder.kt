@@ -31,6 +31,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerInput
 import net.minecraft.world.inventory.MenuType
+import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import java.util.function.Consumer
 
@@ -53,7 +54,6 @@ class AdminToolUIHolder(private val context: AdminToolContext, ui: UI) :
         get() = plugin.publicDataStore.get()
 
     private val keyStore = mutableMapOf<Key, Key>()
-    private var lastInteractTime: Long? = null
 
     private val tasks = mutableListOf<Runnable>()
 
@@ -75,14 +75,12 @@ class AdminToolUIHolder(private val context: AdminToolContext, ui: UI) :
 
     var error: Component? = null
 
-    fun hasTab(): Boolean = currentUI is AdminToolUI && (currentUI as AdminToolUI).showTabs
-
     val container = SimpleContainer(54)
     var title: Component = Component.empty()
 
     fun setupSlot() {
         for (i in 0..53) {
-            this.addSlot(AdminToolSlot(this.container, i, i, 0))
+            this.addSlot(Slot(this.container, i, i, 0))
         }
         this.addStandardInventorySlots(player.inventory, 0, 0)
     }
@@ -138,8 +136,22 @@ class AdminToolUIHolder(private val context: AdminToolContext, ui: UI) :
         this.broadcastChanges()
 
         player.containerMenu.sendAllDataToRemote()
+        val clickContext = ItemClickContext(this, slotIndex, clickType)
         if (action != null) {
-            this.getAction(action)?.invoke(ItemClickContext(this, slotIndex, clickType))
+            this.getAction(action)?.invoke(clickContext)
+        } else {
+            val cancel =
+                if (slotIndex in 0..53) {
+                    currentUI?.onClick(clickContext)?.not() ?: false
+                } else {
+                    currentUI?.bottomClick(clickContext)?.not() ?: false
+                }
+
+            if (cancel) {
+                this.clicked(slotIndex, buttonNum, containerInput, player)
+                player.containerMenu.broadcastFullState()
+                return true
+            }
         }
         return false
     }
@@ -163,10 +175,6 @@ class AdminToolUIHolder(private val context: AdminToolContext, ui: UI) :
 
     fun stopTasks() {
         tasks.clear()
-    }
-
-    fun registerTask(task: Runnable) {
-        tasks.add(task)
     }
 
     fun close() {

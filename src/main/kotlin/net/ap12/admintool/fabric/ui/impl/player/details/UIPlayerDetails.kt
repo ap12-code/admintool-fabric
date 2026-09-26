@@ -1,5 +1,7 @@
 package net.ap12.admintool.fabric.ui.impl.player.details
 
+import kotlin.time.Clock
+import kotlin.time.toKotlinDuration
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.format
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
@@ -24,8 +26,6 @@ import net.minecraft.network.chat.TextColor
 import net.minecraft.stats.Stats
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.Items
-import kotlin.time.Clock
-import kotlin.time.toKotlinDuration
 
 class UIPlayerDetails(private val target: OfflinePlayer) : UI {
     override val id: Key = AdminToolMod.key("player.details")
@@ -120,7 +120,7 @@ class UIPlayerDetails(private val target: OfflinePlayer) : UI {
                         +"&7» &cX: &f${"%.2f".format(target.serverPlayer.position().x)}"
                         +"&7» &aY: &f${"%.2f".format(target.serverPlayer.position().y)}"
                         +"&7» &9Z: &f${"%.2f".format(target.serverPlayer.position().z)}"
-                        +"&7» &6World: &f${target.serverPlayer.level().dimension()}"
+                        +"&7» &6World: &f${target.serverPlayer.level().dimension().identifier()}"
                         +""
                         +"&7» &eYaw: &f${"%.2f".format(target.serverPlayer.yRot)}"
                         +"&7» &bPitch: &f${"%.2f".format(target.serverPlayer.xRot)}"

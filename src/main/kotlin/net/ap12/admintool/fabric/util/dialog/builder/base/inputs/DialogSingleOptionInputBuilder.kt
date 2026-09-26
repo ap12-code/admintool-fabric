@@ -25,7 +25,7 @@ class DialogSingleOptionInputBuilder(
         private var display: Component? = null
 
         fun display(display: Component) {
-            this.display = display.translate(holder.player.locale())
+            this.display = display.translate(holder.player)
         }
 
         fun display(display: String) = display(display.toComponent())

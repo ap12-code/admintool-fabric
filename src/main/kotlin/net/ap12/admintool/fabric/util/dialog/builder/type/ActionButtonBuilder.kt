@@ -2,10 +2,8 @@ package net.ap12.admintool.fabric.util.dialog.builder.type
 
 import net.ap12.admintool.fabric.i18n.translate
 import net.ap12.admintool.fabric.ui.AdminToolUIHolder
-import net.ap12.admintool.fabric.util.components.toComponent
 import net.ap12.admintool.fabric.util.dialog.builder.DialogCallback
 import net.ap12.admintool.fabric.util.dialog.builder.DialogDSL
-import net.ap12.admintool.fabric.util.locale
 import net.minecraft.network.chat.Component
 import net.minecraft.server.dialog.ActionButton
 import net.minecraft.server.dialog.CommonButtonData
@@ -20,21 +18,21 @@ class ActionButtonBuilder(private val holder: AdminToolUIHolder) {
     private var label: Component = Component.empty()
 
     fun label(label: Component) {
-        this.label = label.translate(holder.player.locale())
+        this.label = label.translate(holder.player)
     }
 
     fun label(label: String) {
-        this.label = label.toComponent().translate(holder.player.locale())
+        this.label = Component.translatable(label).translate(holder.player)
     }
 
     private var tooltip: Component? = null
 
     fun tooltip(tooltip: Component) {
-        this.tooltip = tooltip.translate(holder.player.locale())
+        this.tooltip = tooltip.translate(holder.player)
     }
 
     fun tooltip(tooltip: String) {
-        this.tooltip = tooltip.toComponent().translate(holder.player.locale())
+        this.tooltip = Component.translatable(tooltip).translate(holder.player)
     }
 
     private var width: @Range(from = 1, to = 1024) Int = 100

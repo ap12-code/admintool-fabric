@@ -3,6 +3,7 @@ package net.ap12.admintool.fabric.mixin;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import net.ap12.admintool.fabric.ui.AdminToolUIHolder;
 import net.minecraft.network.protocol.game.ServerboundContainerClickPacket;
+import net.minecraft.network.protocol.game.ServerboundContainerClosePacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,6 +38,15 @@ public class ServerGamePacketListenerImplMixin {
             }
 
             ci.cancel();
+        }
+    }
+
+    @Inject(method = "handleContainerClose", at = @At("HEAD"))
+    private void admintool$handleContainerClose(ServerboundContainerClosePacket packet, CallbackInfo ci) {
+        ServerGamePacketListenerImpl self = (ServerGamePacketListenerImpl) (Object) this;
+        ServerPlayer player = self.player;
+        if (player.containerMenu instanceof AdminToolUIHolder holder) {
+            holder.onClose();
         }
     }
 }

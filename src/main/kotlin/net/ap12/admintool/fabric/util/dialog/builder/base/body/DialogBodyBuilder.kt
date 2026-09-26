@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component
 import net.minecraft.server.dialog.body.DialogBody
 import net.minecraft.server.dialog.body.PlainMessage
 
-@Suppress("UnstableApiUsage", "unused")
+@Suppress("unused")
 @DialogDSL
 class DialogBodyBuilder(private val holder: AdminToolUIHolder) {
     private val elements = mutableListOf<DialogBody>()

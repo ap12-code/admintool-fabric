@@ -30,7 +30,7 @@ class UIPlayerLocation(private val target: OfflinePlayer) : UI {
                         +"&7» &cX: &f${"%.2f".format(targetLocation.x)}"
                         +"&7» &aY: &f${"%.2f".format(targetLocation.y)}"
                         +"&7» &9Z: &f${"%.2f".format(targetLocation.z)}"
-                        +"&7» &6World: &f${targetLocation.level}"
+                        +"&7» &6World: &f${targetLocation.level.identifier()}"
                         +divider
                         +"&7» &eYaw: &f${"%.2f".format(targetLocation.yaw)}"
                         +"&7» &bPitch: &f${"%.2f".format(targetLocation.pitch)}"

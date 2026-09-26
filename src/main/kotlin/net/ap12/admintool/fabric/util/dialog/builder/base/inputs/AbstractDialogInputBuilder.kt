@@ -2,8 +2,6 @@ package net.ap12.admintool.fabric.util.dialog.builder.base.inputs
 
 import net.ap12.admintool.fabric.i18n.translate
 import net.ap12.admintool.fabric.ui.AdminToolUIHolder
-import net.ap12.admintool.fabric.util.components.toComponent
-import net.ap12.admintool.fabric.util.locale
 import net.minecraft.network.chat.Component
 import net.minecraft.server.dialog.Input
 
@@ -12,10 +10,10 @@ abstract class AbstractDialogInputBuilder<V>(private val holder: AdminToolUIHold
     protected var label: Component = Component.empty()
 
     fun label(label: Component) {
-        this.label = label.translate(holder.player.locale())
+        this.label = label.translate(holder.player)
     }
 
-    fun label(label: String) = label(label.toComponent())
+    fun label(label: String) = label(Component.translatableEscape(label))
 
     protected var initial: V? = null
 
