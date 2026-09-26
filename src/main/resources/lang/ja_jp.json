@@ -1,0 +1,5 @@
+{
+  "admintool.ui.home.name": "ホーム",
+  "admintool.ui.tp.name": "TP",
+  "admintool.ui.home.gamemode.feedback": "ゲームモードを <arg:0> に変更しました"
+}

@@ -1,0 +1,6 @@
+name: AdminTool
+version: '1.0.0'
+main: net.ap12.admintool.AdminToolPlugin
+api-version: '1.21.8'
+load: STARTUP
+authors: [ ap12 ]

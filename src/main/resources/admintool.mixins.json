@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_21",
+  "package": "net.ap12.admintool.fabric.mixin",
+  "mixins": [
+    "PlayerListAccessor",
+    "ServerCommonPacketListenerImplMixin",
+    "ServerGamePacketListenerImplMixin",
+    "ServerPlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

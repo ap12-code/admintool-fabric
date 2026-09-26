@@ -1,0 +1,12 @@
+timezone: system
+timeformat: "yyyy/MM/dd HH:mm:ss"
+
+directories:
+  playerdata: auto
+
+alwaysShownEffects:
+  night_vision: 1
+
+permissions:
+  modules:
+    gamemode: minecraft.command.gamemode || admintool.modules.gamemode

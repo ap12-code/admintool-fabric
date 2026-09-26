@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "admintool",
+  "version": "${version}",
+  "name": "AdminTool",
+  "description": "Common utilities for server administrator and moderators.",
+  "authors": [
+    "ap12"
+  ],
+  "contact": {
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.ap12.admintool.fabric.AdminToolMod"
+    ]
+  },
+  "mixins": [
+    "admintool.mixins.json"
+  ],
+  "accessWidener": "admintool.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
