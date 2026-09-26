@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap
 import com.mojang.authlib.GameProfile
 import com.mojang.authlib.properties.Property
 import com.mojang.authlib.properties.PropertyMap
+import java.util.*
 import net.ap12.admintool.fabric.AdminToolMod
 import net.ap12.admintool.fabric.util.components.toComponent
 import net.minecraft.core.component.DataComponents
@@ -11,15 +12,9 @@ import net.minecraft.server.players.NameAndId
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.component.ResolvableProfile
-import java.util.*
-import kotlin.jvm.optionals.getOrNull
 
 class HeadManager(private val plugin: AdminToolMod) : IHeadManager {
     private val registeredHeads = mutableMapOf<String, ItemStack>()
-
-    private fun createProfile(name: String): GameProfile? {
-        return plugin.server.services().profileResolver().fetchByName(name).getOrNull()
-    }
 
     private fun createHead(name: String, urlStr: String): ItemStack {
         val stack = ItemStack(Items.PLAYER_HEAD)
