@@ -92,7 +92,9 @@ class UIEffect(private val showAll: Boolean = false) : UIPaginator<Holder<MobEff
 
             onClick("admintool.ui.effect.${element.unwrapKey().get().identifier().path}") { context
                 ->
-                if (context.isLeftClick) {
+                if (context.isShift) {
+                    context.player.removeEffect(element)
+                } else if (context.isLeftClick) {
                     if (oldEffect == null) {
                         context.player.addEffect(effect)
                     } else {
