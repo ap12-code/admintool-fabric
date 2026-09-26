@@ -1,5 +1,7 @@
 package net.ap12.admintool.fabric.ui.impl.effect
 
+import java.util.*
+import kotlin.jvm.optionals.getOrDefault
 import net.ap12.admintool.fabric.AdminToolMod
 import net.ap12.admintool.fabric.i18n.t
 import net.ap12.admintool.fabric.ui.AdminToolUIHolder
@@ -13,13 +15,13 @@ import net.kyori.adventure.key.Key
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.network.chat.Style
 import net.minecraft.network.chat.TextColor
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.alchemy.PotionContents
-import java.util.*
-import kotlin.jvm.optionals.getOrDefault
+import net.minecraft.world.item.component.TooltipDisplay
 
 class UIEffect(private val showAll: Boolean = false) : UIPaginator<Holder<MobEffect>>(), Tab {
     override val id: Key = AdminToolMod.key("effect")
@@ -61,9 +63,21 @@ class UIEffect(private val showAll: Boolean = false) : UIPaginator<Holder<MobEff
                     PotionContents(
                         Optional.empty(),
                         Optional.of(color),
-                        listOf(effect),
+                        emptyList(),
                         Optional.empty(),
                     ),
+                )
+                meta.set(
+                    DataComponents.CUSTOM_NAME,
+                    effect.effect
+                        .value()
+                        .displayName
+                        .copy()
+                        .withStyle(Style.EMPTY.withItalic(false)),
+                )
+                meta.set(
+                    DataComponents.TOOLTIP_DISPLAY,
+                    TooltipDisplay(false, linkedSetOf(DataComponents.POTION_CONTENTS)),
                 )
             }
 
@@ -122,7 +136,7 @@ class UIEffect(private val showAll: Boolean = false) : UIPaginator<Holder<MobEff
                                 oldEffect.showIcon(),
                             )
                         context.player.removeEffect(element)
-                        if (newEffect.amplifier >= 0 && !context.isShift) {
+                        if ((oldEffect.amplifier - 1) >= 0 && !context.isShift) {
                             context.player.addEffect(newEffect)
                         }
                     }

@@ -81,7 +81,12 @@ class ItemBuilder(val stack: ItemStack) {
         stack.also {
             if (name != null) {
                 it.set(DataComponents.RARITY, Rarity.COMMON)
-                it.set(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay(false, linkedSetOf()))
+                val baseTooltip =
+                    it.getOrDefault(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT)
+                val tooltip =
+                    TooltipDisplay(baseTooltip.hideTooltip, baseTooltip.hiddenComponents())
+
+                it.set(DataComponents.TOOLTIP_DISPLAY, tooltip)
                 it.set(DataComponents.ITEM_NAME, name!!.translate(holder.player))
                 if (stack.`is`(Items.PLAYER_HEAD)) {
                     it.set(
