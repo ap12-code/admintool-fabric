@@ -24,8 +24,7 @@ dependencies {
     implementation("net.fabricmc:fabric-language-kotlin:1.13.13+kotlin.2.4.10")
 
     implementation("eu.pb4:sgui:2.1.0+26.2")?.let { include(it) }
-
-    implementation("am.ik.yavi:yavi:0.16.0")
+    implementation("am.ik.yavi:yavi:0.16.0")?.let { include(it) }
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.7.1")
