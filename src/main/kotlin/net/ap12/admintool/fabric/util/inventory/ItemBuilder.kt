@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Style
 import net.minecraft.network.chat.TextColor
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.item.Rarity
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.item.component.ItemLore
@@ -77,12 +78,20 @@ class ItemBuilder(val stack: ItemStack) {
     }
 
     fun toItemStack(holder: AdminToolUIHolder): ItemStack {
-        val locale = holder.player.clientInformation().language()
         stack.also {
             if (name != null) {
                 it.set(DataComponents.RARITY, Rarity.COMMON)
                 it.set(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay(false, linkedSetOf()))
                 it.set(DataComponents.ITEM_NAME, name!!.translate(holder.player))
+                if (stack.`is`(Items.PLAYER_HEAD)) {
+                    it.set(
+                        DataComponents.CUSTOM_NAME,
+                        name!!
+                            .translate(holder.player)
+                            .copy()
+                            .withStyle(Style.EMPTY.withItalic(false)),
+                    )
+                }
             }
             if (lore != null) {
                 val resolvedLore =

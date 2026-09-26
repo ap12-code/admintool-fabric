@@ -11,7 +11,6 @@ import net.minecraft.server.players.NameAndId
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.component.ResolvableProfile
-import java.net.URI
 import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
@@ -23,10 +22,8 @@ class HeadManager(private val plugin: AdminToolMod) : IHeadManager {
     }
 
     private fun createHead(name: String, urlStr: String): ItemStack {
-        val url = URI.create(urlStr).toURL()
         val stack = ItemStack(Items.PLAYER_HEAD)
 
-        val profile = createProfile(name) ?: return createUnknown()
         val properties =
             ImmutableMultimap.of(
                 "textures",
